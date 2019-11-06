@@ -1,0 +1,36 @@
+<html>
+    <title>لیست کاربران</title>
+    <h1>{{ title }} </h1>
+    <ul>
+        {% for u in users %}
+            {% if u.grade > 0 %}
+            <li>
+                {{ u.get_name }} {{ u.grade }}
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% if has_error %}
+        <p style="color: red">
+            {{ field }}: {{ error }}
+        </p>
+    {% endif %}
+    <form action="">{% csrf_token %}
+        نام:
+        <br>
+        {% if field == 'firstname' %}
+            <input type="text" name="firstname" value="Mickey" style="border-color:red">
+        {% else %}
+            <input type="text" name="firstname" value="Mickey" >
+        {% endif %}
+        
+        <br>
+        نام خانوادگی:
+        <br>
+        <input type="text" name="lastname" value="Mouse">
+        <br><br>
+        <input type="text" name="grade">
+        <br>
+        <input type="submit" value="Add user">
+    </form> 
+</html>

@@ -1,0 +1,30 @@
+<html>
+    <title>User List</title>
+    <h1>{{ title }}</h1>
+    <ul>
+           {% for u in users %}
+               <li> {{ u.firstname }} {{ u.lastname }} </li>
+           {% endfor %}
+    </ul>
+    {% if has_error %}
+        <p style="color:red">
+            {{ field }}: {{ error }}
+        </p>
+    {% endif %}
+    <hr/>
+    <form action="" method="POST">{% csrf_token %}
+        Firstname:
+        <br/>
+        <input type="text" name="firstname"/>
+        <br/>
+        Lastname:
+        <br/>
+        <input type="text" name="lastname"/>
+        <br/>
+        Username:
+        <br/>
+        <input type="text" name="username"/>
+        <br/><br/>
+        <input type="submit" value="Add User"/>
+    </form>
+</html>

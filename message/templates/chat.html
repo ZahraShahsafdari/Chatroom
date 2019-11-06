@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>
+            Chat Page
+        </title>
+    </head>
+    <body>
+        <div>
+            <h2>
+                Conversation List
+            </h2>
+            <ul>
+                {% for uc in user_conversations %}
+                <li>
+                    <a href="/chat/{{ uc.conversation.id }}">
+                        {{ uc.conversation.name }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div>
+            <h2>
+                Messages:
+            </h2>
+            <ul>
+                {% for message in messages %}
+                <li>
+                    {{ message.sender.get_full_name }} ( {{ message.sender.username }} ): {{ message.text }}
+                </li>
+                {% endfor %}
+            </ul>
+
+        </div>
+        <hr/>
+        <div>
+            
+            <form method="POST" action="/chat/message/new">{% csrf_token %}
+                <textarea name="text" rows=3 cols=100>
+                </textarea>
+                <input type="hidden" name="c_id" value="{{ conversation_id }}">
+                <input type="submit" value="Send Message" />
+            </form>
+        </div>
+
+    </body>
+</html>
